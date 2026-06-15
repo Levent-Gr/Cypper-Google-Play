@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Built APKs (contain embedded API key) — distribute via Releases, not git
+/apk/
