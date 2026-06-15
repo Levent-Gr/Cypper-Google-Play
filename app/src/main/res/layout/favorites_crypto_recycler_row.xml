@@ -12,70 +12,78 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/ic_recycler_row_bg">
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="14dp">
 
         <ImageView
             android:id="@+id/circleImageView"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:padding="15dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_coin_circle"
+            android:padding="8dp"
             android:loadImageUrl="@{String.valueOf(cryptoFavorite.id)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars" />
+
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:layout_margin="10dp"
-            android:textAlignment="center"
-            android:background="@drawable/ic_text_bg"
+            android:layout_marginStart="14dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@{cryptoFavorite.name}"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/alata_regular"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.532"
+            android:textColor="@color/cy_text_primary"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintEnd_toStartOf="@+id/favoriteRank"
             app:layout_constraintStart_toEndOf="@+id/circleImageView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/circleImageView"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Bitcoin" />
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
             android:text="@{cryptoFavorite.symbol}"
-            android:textColor="@color/white"
+            android:textColor="@color/cy_text_secondary"
             android:textSize="12sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/alata_regular"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
             app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:text="BTC" />
 
         <TextView
+            android:id="@+id/favoriteRank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@{String.valueOf(cryptoFavorite.cmcRank)}"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/alata_regular"
-            app:layout_constraintEnd_toEndOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            android:text="@{`#` + cryptoFavorite.cmcRank}"
+            android:textColor="@color/cy_text_secondary"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/circleImageView"
+            tools:text="#1" />
+
+        <View
+            android:id="@+id/rowDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="14dp"
+            android:background="@color/divider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
