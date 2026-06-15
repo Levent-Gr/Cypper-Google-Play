@@ -2,6 +2,19 @@
 
 This is Cypper app.You can add the cryptocurrencies yo want to fallow closely to your favorites and control them with a single click.
 
+## Setup
+
+The app uses the CoinMarketCap Pro API. The API key is **not** stored in source control; it is read from `local.properties` at build time.
+
+1. Get a key from the [CoinMarketCap Developer Portal](https://pro.coinmarketcap.com/).
+2. Add this line to your `local.properties` (the file is git-ignored):
+
+   ```properties
+   CMC_API_KEY=your_api_key_here
+   ```
+
+3. Build the project. The key is exposed in code as `BuildConfig.CMC_API_KEY`.
+
 ## Libraries And Tools
 
 - Used Language Kotlin

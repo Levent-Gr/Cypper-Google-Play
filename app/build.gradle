@@ -6,6 +6,13 @@ plugins {
     id("androidx.navigation.safeargs")
 }
 
+// Load secrets from local.properties (git-ignored) so API keys stay out of source control.
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withInputStream { localProperties.load(it) }
+}
+
 android {
     compileSdk 32
 
@@ -15,6 +22,9 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
+
+        // API key is injected from local.properties at build time (never committed).
+        buildConfigField "String", "CMC_API_KEY", "\"${localProperties.getProperty('CMC_API_KEY', '')}\""
 
         //testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner "com.leventgorgu.cryptoinfo.HiltTestRunner"
@@ -36,9 +46,8 @@ android {
     }
     buildFeatures {
         viewBinding true
-    }
-    buildFeatures {
         dataBinding true
+        buildConfig true
     }
     kapt {
         correctErrorTypes = true

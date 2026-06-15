@@ -1,7 +1,9 @@
 package com.leventgorgu.cryptoinfo.util
 
+import com.leventgorgu.cryptoinfo.BuildConfig
+
 object Util {
-    const val API_KEY = "4dc71059-d2ee-4ccd-9bdd-3baa088048c3"
+    val API_KEY = BuildConfig.CMC_API_KEY
     const val BASE_URL = "https://pro-api.coinmarketcap.com"
     const val LIMIT = "800"
 }
