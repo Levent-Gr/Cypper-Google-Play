@@ -3,6 +3,7 @@ package com.leventgorgu.cryptoinfo.di
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.leventgorgu.cryptoinfo.api.CoinGeckoAPI
 import com.leventgorgu.cryptoinfo.api.CryptoAPI
 import com.leventgorgu.cryptoinfo.repo.CryptoRepository
 import com.leventgorgu.cryptoinfo.repo.CryptoRepositoryInterface
@@ -30,6 +31,14 @@ object AppModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(CryptoAPI::class.java)
+
+    @Singleton
+    @Provides
+    fun injectCoinGeckoAPI(): CoinGeckoAPI = Retrofit.Builder()
+        .baseUrl("https://api.coingecko.com/api/v3/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+        .create(CoinGeckoAPI::class.java)
 
     @Singleton
     @Provides

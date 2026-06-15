@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.leventgorgu.cryptoinfo.api.CoinGeckoAPI
 import com.leventgorgu.cryptoinfo.repo.CryptoRepository
 import com.leventgorgu.cryptoinfo.repo.CryptoRepositoryInterface
 import com.leventgorgu.cryptoinfo.roomdb.CryptoEntity
@@ -20,7 +21,11 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val cryptoRepository: CryptoRepositoryInterface,application: Application) : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val cryptoRepository: CryptoRepositoryInterface,
+    private val coinGeckoAPI: CoinGeckoAPI,
+    application: Application
+) : ViewModel() {
 
     private var customSharedPreferences = CustomSharedPreferences(application.applicationContext)
     private var refreshTime = 5 * 60 * 1000 * 1000 * 1000L
@@ -30,6 +35,9 @@ class HomeViewModel @Inject constructor(private val cryptoRepository: CryptoRepo
 
     private val _cryptosSearch = MutableLiveData<List<CryptoEntity>>()
     val cryptosSearch: LiveData<List<CryptoEntity>> = _cryptosSearch
+
+    private val _heroChart = MutableLiveData<List<Float>>()
+    val heroChart: LiveData<List<Float>> = _heroChart
 
     val cryptoListLiveDataFromSQl = getCryptosData()
 
@@ -68,6 +76,21 @@ class HomeViewModel @Inject constructor(private val cryptoRepository: CryptoRepo
     fun searchCrypto(newText: String?) {
         viewModelScope.launch(handler) {
             _cryptosSearch.value = cryptoRepository.searchCrypto(newText!!)
+        }
+    }
+
+    /** Fetches Bitcoin's 7-day price series from CoinGecko for the home spotlight chart. */
+    fun loadHeroChart() {
+        if (_heroChart.value != null) return
+        viewModelScope.launch(handler) {
+            try {
+                val response = coinGeckoAPI.getMarketChart("bitcoin", "usd", 7)
+                if (response.isSuccessful) {
+                    _heroChart.value = response.body()?.prices?.map { it[1].toFloat() } ?: emptyList()
+                }
+            } catch (e: Exception) {
+                // hero chart is non-critical; ignore failures
+            }
         }
     }
 }
