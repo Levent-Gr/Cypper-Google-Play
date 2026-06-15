@@ -12,6 +12,8 @@
     <string name="crypto_platform">Platform</string>
     <string name="crypto_description">Description : %s</string>
     <string name="crypto_price">Price</string>
+    <string name="crypto_about">About</string>
+    <string name="crypto_24h_change">24h change</string>
     <string name="remove_from_favorites">Remove</string>
     <string name="save_to_favorites">Save</string>
     <string name="first_fragment_text">Welcome to the Cypper app. You can add the cryptocurrencies you want to follow closely to your favorites and control them with a single click.</string>
