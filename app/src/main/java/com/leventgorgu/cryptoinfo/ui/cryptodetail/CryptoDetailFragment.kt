@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -17,6 +18,9 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.google.gson.Gson
 import com.leventgorgu.cryptoinfo.R
 import com.leventgorgu.cryptoinfo.databinding.FragmentCryptoDetailBinding
@@ -46,6 +50,8 @@ class CryptoDetailFragment : Fragment() {
     private lateinit var cryptoEntity: CryptoEntity
     private var themeApplied = false
     private var originalStatusBarColor: Int = 0
+    private var coinColor: Int? = null
+    private var chartPrices: List<Float>? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,6 +89,14 @@ class CryptoDetailFragment : Fragment() {
 
         // Adaptive theming: recolor the whole screen to the selected coin's brand color.
         applyCoinTheme(cryptoSymbol, cryptoId)
+
+        // Per-coin 7-day price chart (CoinGecko), drawn in the coin's color.
+        setupDetailChart()
+        cryptoDetailViewModel.loadChart(cryptoSymbol)
+        cryptoDetailViewModel.detailChart.observe(viewLifecycleOwner) { prices ->
+            chartPrices = prices
+            maybeDrawChart()
+        }
     }
 
     private fun applyCoinTheme(symbol: String, id: Int) {
@@ -137,6 +151,46 @@ class CryptoDetailFragment : Fragment() {
         b.saveCryptoButton.setTextColor(CoinTheme.textOn(coin))
 
         requireActivity().window.statusBarColor = tintTop
+
+        coinColor = coin
+        maybeDrawChart()
+    }
+
+    private fun setupDetailChart() {
+        binding.detailChart.apply {
+            setTouchEnabled(false)
+            setDrawGridBackground(false)
+            description.isEnabled = false
+            legend.isEnabled = false
+            axisLeft.isEnabled = false
+            axisRight.isEnabled = false
+            xAxis.isEnabled = false
+            setViewPortOffsets(0f, 8f, 0f, 8f)
+            minOffset = 0f
+        }
+    }
+
+    private fun maybeDrawChart() {
+        val b = _binding ?: return
+        val lineColor = coinColor ?: return
+        val prices = chartPrices ?: return
+        if (prices.isEmpty()) return
+        val entries = prices.mapIndexed { i, p -> Entry(i.toFloat(), p) }
+        val set = LineDataSet(entries, "price").apply {
+            color = lineColor
+            lineWidth = 2f
+            setDrawCircles(false)
+            setDrawValues(false)
+            mode = LineDataSet.Mode.CUBIC_BEZIER
+            setDrawFilled(true)
+            fillDrawable = GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(ColorUtils.setAlphaComponent(lineColor, 80), ColorUtils.setAlphaComponent(lineColor, 0))
+            )
+        }
+        b.detailChart.data = LineData(set)
+        b.detailChart.visibility = View.VISIBLE
+        b.detailChart.invalidate()
     }
 
     private fun dpF(value: Float) = value * resources.displayMetrics.density

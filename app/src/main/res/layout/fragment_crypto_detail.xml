@@ -107,6 +107,15 @@
                         tools:text="+2.14%"
                         tools:textColor="@color/up" />
 
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/detailChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginEnd="8dp"
+                        android:visibility="gone" />
+
                 </LinearLayout>
 
                 <LinearLayout
