@@ -94,9 +94,9 @@ class CryptoRepository @Inject constructor(private val cryptoAPI: CryptoAPI,priv
         for (crypto in cryptoData){
             val id = crypto.id
             val name = crypto.name
-            val rank = crypto.cmc_rank.toInt()
+            val rank = crypto.cmc_rank ?: 0
 
-            val price = crypto.quote.USD.price
+            val price = crypto.quote.USD.price ?: 0.0
             val formatter = DecimalFormat("$##,###.##")
             var priceString = formatter.format(price)
             priceString = priceString.substring(0, 1) + " " + priceString.substring(1, priceString.length);
@@ -106,10 +106,7 @@ class CryptoRepository @Inject constructor(private val cryptoAPI: CryptoAPI,priv
             }
 
             val symbol = crypto.symbol
-            var platform = ""
-            if (crypto.platform!=null){
-                platform = crypto.platform.name
-            }
+            val platform = crypto.platform?.name ?: ""
             val cryptoEntity = CryptoEntity(id,name,symbol,rank,priceString,platform)
             cryptoEntityList.add(cryptoEntity)
         }

@@ -1,9 +1,9 @@
 package com.leventgorgu.cryptoinfo.model.cryptos
 
 data class Platform(
-    val id: Int,
-    val name: String,
-    val slug: String,
-    val symbol: String,
-    val token_address: String
+    val id: Int?,
+    val name: String?,
+    val slug: String?,
+    val symbol: String?,
+    val token_address: String?
 )
