@@ -6,72 +6,77 @@
     tools:context=".ui.home.HomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_ground">
+    android:background="@drawable/bg_app">
+
+    <TextView
+        android:id="@+id/homeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/title_home_markets"
+        android:textColor="@color/cy_text_primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bg_search"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="@string/search_coins"
+        android:textColor="@color/cy_text_primary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeTitle" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshCryptos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cryptoRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp"
+            tools:listitem="@layout/home_crypto_recycler_row" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminateTint="@color/accent"
         android:visibility="gone"
-        android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/error_try_again"
-        android:textColor="@color/white"
+        android:textColor="@color/cy_text_secondary"
         android:visibility="gone"
-        android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshCryptos"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_bg_title_2">
-                <SearchView
-                    android:id="@+id/searchView"
-                    android:layout_width="280dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="30dp"
-                    android:background="@drawable/search_view_bg"
-                    android:iconifiedByDefault="false"
-                    android:queryBackground="@android:color/transparent"
-                    android:queryHint="Bitcoin"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.496"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cryptoRecyclerView"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchView" />
-        </LinearLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

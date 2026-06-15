@@ -10,50 +10,94 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/ic_rowcrypto">
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="14dp">
+
         <ImageView
             android:id="@+id/cryptoImageView"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_marginTop="4dp"
-            android:padding="20dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_coin_circle"
+            android:padding="8dp"
             android:loadImageUrl="@{String.valueOf(crypto.id)}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/cryptoName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="0dp"
+            android:layout_marginStart="14dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@{crypto.name}"
+            android:textColor="@color/cy_text_primary"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/cryptoSymbol"
+            app:layout_constraintEnd_toStartOf="@+id/cryptoPrice"
+            app:layout_constraintStart_toEndOf="@+id/cryptoImageView"
+            app:layout_constraintTop_toTopOf="@+id/cryptoImageView"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Bitcoin" />
+
+        <TextView
+            android:id="@+id/cryptoSymbol"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
+            android:text="@{crypto.symbol}"
+            android:textColor="@color/cy_text_secondary"
             android:textSize="12sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:fontFamily="@font/alata_regular"
-            app:layout_constraintEnd_toEndOf="@+id/cryptoImageView"
-            app:layout_constraintStart_toStartOf="@+id/cryptoImageView"
-            app:layout_constraintTop_toBottomOf="@+id/cryptoImageView" />
+            app:layout_constraintBottom_toBottomOf="@+id/cryptoImageView"
+            app:layout_constraintStart_toStartOf="@+id/cryptoName"
+            app:layout_constraintTop_toBottomOf="@+id/cryptoName"
+            tools:text="BTC" />
 
         <TextView
             android:id="@+id/cryptoPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:paddingBottom="10dp"
-            android:text="@{String.valueOf(crypto.price)}"
-            android:textSize="12sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:fontFamily="@font/alata_regular"
-            app:layout_constraintEnd_toEndOf="@+id/cryptoImageView"
-            app:layout_constraintStart_toStartOf="@+id/cryptoImageView"
-            app:layout_constraintTop_toBottomOf="@+id/cryptoName" />
+            android:text="@{crypto.price}"
+            android:textColor="@color/cy_text_primary"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/cryptoChange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cryptoImageView"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="$ 65,361.74" />
 
+        <TextView
+            android:id="@+id/cryptoChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="12sp"
+            app:changePercent="@{crypto.changePercent24h}"
+            app:layout_constraintBottom_toBottomOf="@+id/cryptoImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cryptoPrice"
+            tools:text="+2.14%"
+            tools:textColor="@color/up" />
+
+        <View
+            android:id="@+id/rowDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="14dp"
+            android:background="@color/divider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/cryptoName"
+            app:layout_constraintTop_toBottomOf="@+id/cryptoImageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

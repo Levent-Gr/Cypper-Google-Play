@@ -38,7 +38,9 @@ object AppModule {
     @Singleton
     @Provides
     fun injectRoomDatabase(@ApplicationContext context: Context):CryptoDatabase
-    = Room.databaseBuilder(context,CryptoDatabase::class.java,"crypto-database").build()
+    = Room.databaseBuilder(context,CryptoDatabase::class.java,"crypto-database")
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Singleton
     @Provides

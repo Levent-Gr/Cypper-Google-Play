@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.leventgorgu.cryptoinfo.adapter.CryptoRecyclerAdapter
 import com.leventgorgu.cryptoinfo.databinding.FragmentHomeBinding
 import com.leventgorgu.cryptoinfo.roomdb.CryptoFavoriteEntity
@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.refreshData()
 
-        binding.cryptoRecyclerView.layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
+        binding.cryptoRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.cryptoRecyclerView.adapter = cryptoRecyclerAdapter
 
         binding.searchView.clearFocus()

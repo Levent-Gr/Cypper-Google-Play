@@ -107,7 +107,8 @@ class CryptoRepository @Inject constructor(private val cryptoAPI: CryptoAPI,priv
 
             val symbol = crypto.symbol
             val platform = crypto.platform?.name ?: ""
-            val cryptoEntity = CryptoEntity(id,name,symbol,rank,priceString,platform)
+            val change24h = crypto.quote.USD.percent_change_24h ?: 0.0
+            val cryptoEntity = CryptoEntity(id,name,symbol,rank,priceString,platform,change24h)
             cryptoEntityList.add(cryptoEntity)
         }
         return cryptoEntityList

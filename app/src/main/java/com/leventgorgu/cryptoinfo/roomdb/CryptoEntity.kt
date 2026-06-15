@@ -17,7 +17,9 @@ data class CryptoEntity(
     @ColumnInfo(name = "Price_USD")
     val price :String,
     @ColumnInfo(name = "Platform")
-    val platform:String
+    val platform:String,
+    @ColumnInfo(name = "Change_24h")
+    val changePercent24h: Double = 0.0
 ){
 
 }

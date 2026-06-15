@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Cypper semantic palette (DARK / premium gold-obsidian) ===== -->
+    <color name="bg">#0B0A08</color>
+    <color name="bg_top">#14110B</color>
+    <color name="surface">#15110A</color>
+    <color name="surface_variant">#1B1810</color>
+    <color name="cy_text_primary">#F6F1E6</color>
+    <color name="cy_text_secondary">#998F78</color>
+    <color name="divider">#221D12</color>
+    <color name="accent">#E0B25A</color>
+    <color name="on_accent">#2A1F08</color>
+    <color name="up">#36C68A</color>
+    <color name="down">#E5645E</color>
+    <color name="up_bg">#13271C</color>
+    <color name="down_bg">#2A1414</color>
+</resources>

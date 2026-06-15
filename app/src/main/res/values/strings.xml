@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Cypper</string>
     <string name="title_home">Home</string>
+    <string name="title_home_markets">Markets</string>
+    <string name="search_coins">Search coins…</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_notifications">News</string>
     <string name="crypto_name">Name</string>

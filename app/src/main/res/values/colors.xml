@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Legacy palette (kept for screens not yet migrated) -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -14,4 +15,18 @@
     <color name="back_ground_color_top">#2A3350</color>
     <color name="red">#FF0000</color>
 
+    <!-- ===== Cypper semantic palette (LIGHT values; dark in values-night) ===== -->
+    <color name="bg">#F6F4EF</color>
+    <color name="bg_top">#FBFAF6</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#EFEDE4</color>
+    <color name="cy_text_primary">#16140F</color>
+    <color name="cy_text_secondary">#6E6A5E</color>
+    <color name="divider">#E7E3D8</color>
+    <color name="accent">#B8893C</color>
+    <color name="on_accent">#2A1F08</color>
+    <color name="up">#0E9E6E</color>
+    <color name="down">#D63A3A</color>
+    <color name="up_bg">#E1F2EA</color>
+    <color name="down_bg">#F6E2E2</color>
 </resources>
